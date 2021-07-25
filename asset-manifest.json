@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/team-plateform/static/css/main.7f915f38.chunk.css",
+    "main.js": "/team-plateform/static/js/main.116ebecc.chunk.js",
+    "main.js.map": "/team-plateform/static/js/main.116ebecc.chunk.js.map",
+    "runtime-main.js": "/team-plateform/static/js/runtime-main.da3c3201.js",
+    "runtime-main.js.map": "/team-plateform/static/js/runtime-main.da3c3201.js.map",
+    "static/css/2.18d2bca9.chunk.css": "/team-plateform/static/css/2.18d2bca9.chunk.css",
+    "static/js/2.6c59448c.chunk.js": "/team-plateform/static/js/2.6c59448c.chunk.js",
+    "static/js/2.6c59448c.chunk.js.map": "/team-plateform/static/js/2.6c59448c.chunk.js.map",
+    "index.html": "/team-plateform/index.html",
+    "static/css/2.18d2bca9.chunk.css.map": "/team-plateform/static/css/2.18d2bca9.chunk.css.map",
+    "static/css/main.7f915f38.chunk.css.map": "/team-plateform/static/css/main.7f915f38.chunk.css.map",
+    "static/js/2.6c59448c.chunk.js.LICENSE.txt": "/team-plateform/static/js/2.6c59448c.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.da3c3201.js",
+    "static/css/2.18d2bca9.chunk.css",
+    "static/js/2.6c59448c.chunk.js",
+    "static/css/main.7f915f38.chunk.css",
+    "static/js/main.116ebecc.chunk.js"
+  ]
+}
