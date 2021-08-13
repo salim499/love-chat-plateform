@@ -1,23 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
 
-.bodyVideo {
-  font-family: 'Syne Mono', monospace;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin: 80px 10px;
+.videosContainer{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: turquoise;
 }
-
-.bodyVideo {
-  width: 40vw;
-  height: 30vw;
-  margin: 2rem;
-  background: #2c3e50;
+.videoEmitter{
+  height:380px;
+  width: 48%;
 }
-
-.videos {
+.videoReceiver{
+  height:380px;
+  width: 48%;
+}
+.videoActions{
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  background-color:white;
+}
+.modal-content{
+  background-color: transparent;
+  margin-top: 10px;
+  height:auto;
+  width:auto;
+  display: flex;
+  position: flex;
 }

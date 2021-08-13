@@ -1,49 +1,99 @@
 import React from 'react';
+import { Container } from "react-bootstrap";
 import { 
   HashRouter as Router,
   Route,
   Redirect,
   Switch
-} from 'react-router-dom';
+} from 'react-router-dom'
+import './App.css'
 
-import About from './pages/About/About';
-import Contact from './pages/Contact/Contact';
-import Home from './pages/Home/Home';
-import Services from './pages/Service/Services';
-import Testimonial from './pages/Testimonial/Testimonial';
-import ChatRoom from './pages/ChatRoom/ChatRoom';
-import Navbar from './Components/Navbar/Navbar';
-import VideoChatContainer from './Components/VideoChatContainer';
-import Receiver from './Components/receiver'
+
+import ChatRoom from './pages/ChatRoom'
+import Navbar from './Components/Navbar';
+import VideoChatContainer from './Components/videoCallContainer';
+
+import Signup from './Components/SignUp';
+import Login from './Components/Login';
+import Profil from './Components/Profil'
+import ForgotPassword from './Components/ForgotPassword';
+import UpdateProfil from './Components/UpdateProfile';
+
+import {AuthProvider} from './Contexts/AuthContext'
+import {PeerProvider} from './Contexts/PeerContext'
 
 const App = () => {
   return (
+  <PeerProvider>
+  <AuthProvider>
+  <div className="App">
    <Router>
     <Navbar/>
     <main>
       <Switch>
         <Route path="/" exact>
-          <VideoChatContainer/>
         </Route>
-        <Route path="/about" exact>
-          <Receiver/>
+        <Route path="/forgot-password" exact>
+        <Container
+      className="d-flex align-items-center justify-content-center"
+      style={{ minHeight: "100vh" }}
+    >
+      <div className="w-100" style={{ maxWidth: "400px" }}>
+      <ForgotPassword/>
+      </div>
+    </Container>
         </Route>
-        <Route path="/service" exact>
-          <Services/>
+        <Route path="/signup" exact>
+        <Container
+      className="d-flex align-items-center justify-content-center"
+      style={{ minHeight: "100vh" }}
+    >
+      <div className="w-100" style={{ maxWidth: "400px" }}>
+      <Signup/>
+      </div>
+    </Container>
         </Route>
-        <Route path="/testimonial" exact>
-          <Testimonial/>
+        <Route path="/login" exact>
+        <Container
+      className="d-flex align-items-center justify-content-center"
+      style={{ minHeight: "100vh" }}
+    >
+      <div className="w-100" style={{ maxWidth: "400px" }}>
+      <Login/>
+      </div>
+    </Container>
         </Route>
-        <Route path="/contact" exact>
-          <Contact/>
+        <Route path="/my-account" exact>
+        <Container
+      className="d-flex align-items-center justify-content-center"
+      style={{ minHeight: "100vh" }}
+    >
+      <div className="w-100" style={{ maxWidth: "400px" }}>
+      <Profil/>
+      </div>
+    </Container>
+        </Route>
+        <Route path="/update-profile" exact>
+        <Container
+      className="d-flex align-items-center justify-content-center"
+      style={{ minHeight: "100vh" }}
+    >
+      <div className="w-100" style={{ maxWidth: "400px" }}>
+      <UpdateProfil/>
+      </div>
+    </Container>
         </Route>
         <Route path="/chat" exact>
           <ChatRoom/>
+          <VideoChatContainer/>
         </Route>
         <Redirect to="/" />
       </Switch>
     </main>
    </Router>
+  </div>
+  </AuthProvider>
+  </PeerProvider>
   );
 }
 
