@@ -41,14 +41,7 @@ i {
   transition-duration: 0.6s;
   position: relative;
 }
-#navbarSupportedContent > ul > li.active > a {
-  color: rgb(0,123,255);
-  background-color: #fff;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  margin: 1px;
-  transition: all 0.5s;
-}
+
 #navbarSupportedContent a:not(:only-child):after {
   content: '\f105';
   position: absolute;

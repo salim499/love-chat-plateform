@@ -11,7 +11,6 @@ const Navbar = () => {
 
   const {currentUser } = useAuth()
 
-  useEffect(()=>{console.log(currentUser)},[currentUser])
 
   function animation(){
     var tabsNewAnim = $('#navbarSupportedContent');
@@ -56,7 +55,7 @@ const Navbar = () => {
   <nav className="navbar navbar-expand-lg navbar-mainbg">
     
       <NavLink className="navbar-brand navbar-logo" to="/" exact>
-        Web Solutions
+        SalKat Love Calculator
       </NavLink>
       <button 
         className="navbar-toggler"
@@ -85,26 +84,13 @@ const Navbar = () => {
         </li>
 
         <li className="nav-item">
-          <NavLink className="nav-link" to="/" exact>
-            <i 
-            className="far fa-address-book">
-            </i>About
-          </NavLink> 
-        </li>
-
-        <li className="nav-item">
-          <NavLink className="nav-link" to="#" exact>
-            <AiOutlineLogout/>Logout
-          </NavLink>
-        </li>
-        <li className="nav-item">
           <NavLink className="nav-link" to="/my-account" exact>
             <VscAccount/>My Account
           </NavLink>
         </li>
         <li className="nav-item">
           <NavLink className="nav-link" to="/chat" exact>
-          <BsChatDots/>Discussion 
+          <BsChatDots/>Chatroom 
           </NavLink>
         </li>
     </ul>

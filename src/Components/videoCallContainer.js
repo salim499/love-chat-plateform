@@ -10,7 +10,7 @@ import {FiVideo, FiVideoOff} from 'react-icons/fi'
 import {MdCallEnd, MdCall} from 'react-icons/md'
 function VideoCallContainer() {
 
-    const {showVideoCall, currentCallState, callInformation } = usePeer() 
+    const {showVideoCall, currentCallState, callInformation, setCallInformation, setShowVideoCall } = usePeer() 
     const {usersChat, currentUser } = useAuth()   
 
     const videoEmitter = useRef()
@@ -20,6 +20,8 @@ function VideoCallContainer() {
     const [answerCall, setAnswerCall] = useState(false)
     const [cameraOn, setCameraOn] = useState(true) 
     const [soundOn, setSoundOn] = useState(true)
+    const [showResponseButton,setShowResponseButton] = useState(false)
+    const [endCallText, setEndCallText] = useState(false)
 
     useEffect(async ()=>{
         if(showVideoCall){
@@ -54,6 +56,7 @@ function VideoCallContainer() {
         else if (currentCallState==="callResponse"){
             videoEmitter.current.srcObject=await navigator.mediaDevices.getUserMedia({ video: true, audio: true })
             videoEmitter.current.play()
+            setShowResponseButton(true)
         }
         }
     },[showVideoCall, currentCallState])
@@ -61,6 +64,7 @@ function VideoCallContainer() {
     useEffect(()=>{
         const call=firebase.firestore().collection('calls').doc(currentUser.email)
         .onSnapshot(async(snapshot)=>{
+          setCallInformation(snapshot.data())
           if(snapshot.data()&&snapshot.data().type==="response"){
             peer.current.signal(JSON.parse(snapshot.data().sd))
             
@@ -69,12 +73,26 @@ function VideoCallContainer() {
                 videoReceiver.current.srcObject=data
                 videoReceiver.current.play()
               }) 
-          } 
+          } else if (snapshot.data()==null) {
+            setShowVideoCall(false)
+          }
         })
+    },[])
+
+    useEffect(()=>{
+      const call=firebase.firestore().collection('destroy').doc(currentUser.email)
+      .onSnapshot(async(snapshot)=>{
+        if(snapshot.data()!=null){
+          setAnswerCall(false)
+          setEndCallText(true)
+        }
+
+      })
     },[])
 
     const handleAnswerCall = () => {
       setAnswerCall(true)
+      setShowResponseButton(false)
       peer.current=new Peer({
         initiator:false,
         stream:videoEmitter.current.srcObject,
@@ -112,9 +130,25 @@ function VideoCallContainer() {
       videoEmitter.current.srcObject.getAudioTracks()[0].enabled = !videoEmitter.current.srcObject.getAudioTracks()[0].enabled
       setSoundOn(!soundOn)
     }
-    const handleDestroyCall=()=>{
+    const handleDestroyCall= async()=>{
+
+      const destroyCall=firebase.firestore().collection('destroy').doc(usersChat[0].email)
+      .set({
+          destroy:currentUser.email
+      })
+
       peer.current.destroy()
-      console.log("destroy")
+      try {
+        await firebase.firestore().collection('calls').doc(currentUser.email).delete()
+        console.log("Current successfully deleted!");
+        await firebase.firestore().collection('calls').doc(callInformation.from).delete()
+        console.log("Other successfully deleted!");
+      }
+      catch(error){
+        console.error("Error removing document: ", error);
+      }
+      setShowVideoCall(false)
+
     }
     return (
         <Modal show={showVideoCall} size="lg"
@@ -122,11 +156,21 @@ function VideoCallContainer() {
         >
            <div className="videosContainer">
            <video ref={videoEmitter} className="videoEmitter"></video> 
-           { answerCall?
+           { answerCall&&
            <video ref={videoReceiver} className="videoReceiver"></video>
-           :false}
+           }
+           { showResponseButton&&
+           <div style={{width:'50%', display:'flex', alignItems: 'center', justifyContent: 'center'}}>
+           <MdCall size={48} onClick={handleAnswerCall}></MdCall>Answer the call from {callInformation.from.split('@')[0]}
            </div>
-           <button onClick={handleAnswerCall}>answer the call</button>
+           }
+           {endCallText&&
+          <div style={{width:'50%', display:'flex', alignItems: 'center', justifyContent: 'center'}}>
+            The call is over 
+          </div>
+           }
+           </div>
+           
            <div className="videoActions"> 
           {!cameraOn?<FiVideo size={48} onClick={handleCameraOnOff}/>:
           <FiVideoOff size={48} onClick={handleCameraOnOff}/>}

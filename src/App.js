@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState } from 'react';
 import { Container } from "react-bootstrap";
 import { 
   HashRouter as Router,
@@ -10,6 +10,7 @@ import './App.css'
 
 
 import ChatRoom from './pages/ChatRoom'
+import Home from './pages/Home'
 import Navbar from './Components/Navbar';
 import VideoChatContainer from './Components/videoCallContainer';
 
@@ -23,15 +24,17 @@ import {AuthProvider} from './Contexts/AuthContext'
 import {PeerProvider} from './Contexts/PeerContext'
 
 const App = () => {
+  
+
   return (
   <PeerProvider>
   <AuthProvider>
   <div className="App">
    <Router>
     <Navbar/>
-    <main>
       <Switch>
         <Route path="/" exact>
+          <Home/>
         </Route>
         <Route path="/forgot-password" exact>
         <Container
@@ -89,7 +92,6 @@ const App = () => {
         </Route>
         <Redirect to="/" />
       </Switch>
-    </main>
    </Router>
   </div>
   </AuthProvider>

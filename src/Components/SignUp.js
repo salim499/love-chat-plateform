@@ -49,7 +49,8 @@ function SignUp() {
             headers: {"private-key":process.env.REACT_APP_CHAT_ENGINE_PRIVATE_KEY}
           })
           console.log(res)
-            //history.push("/chatroom")
+          setShow(false)
+          history.push("/")
         } catch {
           setError("Failed to create an account")
         }
