@@ -24,7 +24,7 @@ function VideoCall() {
     const [showVideoEmitter, setShowVideoEmitter] = useState(true)
     const [showVideoReceiver, setShowVideoReceiver] = useState(false)
     const [showCallIcon, setShowCallIcon] = useState('show')
-    const [callText, setCallText] = useState({text:'', user:''})
+    const [callText, setCallText] = useState({text:'Receiver video', user:''})
     const [receivedCallInfo, setReceivedCallInfo] = useState(null)
 
     useEffect(async()=>{

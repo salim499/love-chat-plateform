@@ -86,17 +86,20 @@ const Navbar = () => {
           <AiOutlineHome/>Home
           </NavLink>
         </li>
-        <li className="nav-item">
+        <li className="nav-item"
+        style={{backgroundColor:location.pathname==='/my-account'?'rgba(255,255,255,0.2)':null}}>
           <NavLink className="nav-link" to="/my-account" exact>
             <VscAccount/>My Account
           </NavLink>
         </li>
-        <li className="nav-item">
+        <li className="nav-item"
+        style={{backgroundColor:location.pathname==='/chat'?'rgba(255,255,255,0.2)':null}}>
           <NavLink className="nav-link" to="/chat" exact>
           <BsChatDots/>Chatroom 
           </NavLink>
         </li>
-        <li className="nav-item">
+        <li className="nav-item"
+        style={{backgroundColor:location.pathname==='/call'?'rgba(255,255,255,0.2)':null}}>
           <NavLink className="nav-link" to="/call" exact>
           <MdCall/>PeerToPeerCall
           </NavLink>
