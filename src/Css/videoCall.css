@@ -89,17 +89,6 @@
     .video {
         margin: auto;
         margin-top:60px;
-        height: 1000px;
-        width: 500px;
-        display: flex;
-        flex-direction: column;
-        background-color: aliceblue;
-    }
-}
-@media (max-width: 501px){
-    .video {
-        margin: auto;
-        margin-top:60px;
         height: 800px;
         width: 400px;
         display: flex;
@@ -129,6 +118,9 @@
         justify-content:center;
         align-items:center;
     }
+}
+@media (max-width: 501px){
+    
 }
 
 
