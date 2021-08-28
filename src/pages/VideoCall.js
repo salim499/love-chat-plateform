@@ -28,7 +28,7 @@ function VideoCall() {
     const [receivedCallInfo, setReceivedCallInfo] = useState(null)
 
     useEffect(async()=>{
-        videoEmitter.current.srcObject = await navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+        videoEmitter.current.srcObject = await navigator.mediaDevices.getUserMedia({ video: true, audio: true })
         videoEmitter.current.play()
     },[])
     
