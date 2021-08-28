@@ -2,11 +2,12 @@ import React , {useEffect} from 'react'
 import './../Css/Navbar.css';
 import { NavLink } from 'react-router-dom';
 import $ from 'jquery';
-import { useAuth } from "../Contexts/AuthContext"
+import { useAuth } from '../Contexts/AuthContext'
 import {AiOutlineLogin, AiOutlineHome, AiOutlineLogout} from 'react-icons/ai'
 import {VscSignIn, VscAccount} from 'react-icons/vsc'
 import {BsChatDots} from 'react-icons/bs'
 import { IconContext } from 'react-icons'
+import {MdCall} from 'react-icons/md'
 const Navbar = () => {
 
   const {currentUser } = useAuth()
@@ -82,7 +83,6 @@ const Navbar = () => {
           <AiOutlineHome/>Home
           </NavLink>
         </li>
-
         <li className="nav-item">
           <NavLink className="nav-link" to="/my-account" exact>
             <VscAccount/>My Account
@@ -91,6 +91,11 @@ const Navbar = () => {
         <li className="nav-item">
           <NavLink className="nav-link" to="/chat" exact>
           <BsChatDots/>Chatroom 
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/call" exact>
+          <MdCall/>PeerToPeerCall
           </NavLink>
         </li>
     </ul>

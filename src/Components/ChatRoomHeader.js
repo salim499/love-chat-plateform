@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react'
 import {FiVideo} from 'react-icons/fi'
-import {MdCall} from 'react-icons/md'
 import { IconContext } from "react-icons"
 import '../Css/ChatRoomHeader.css'
 import { usePeer } from "../Contexts/PeerContext"

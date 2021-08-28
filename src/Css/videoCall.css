@@ -1,0 +1,86 @@
+.video {
+    margin: auto;
+    margin-top:60px;
+    height: 500px;
+    width: 1000px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: aliceblue;
+}
+.video-item {
+    width: 500px;
+    height: 500px;
+}
+
+.video-item video {
+    margin: 2px;
+    height: 446px;
+    width: 496px;
+    border-radius:5px;
+    background-color: lightgray;
+}
+#pet-select {
+    font-size: .9rem;
+    padding: 2px 5px;
+}
+.video-item-icon {
+    margin-left:40px;
+    color:white;
+    background-color:rgb(0, 255, 128);
+    border-radius: 100%;
+    border: 5px solid rgb(0, 255, 128);
+}
+.video-item-icon:hover {
+    color:rgb(0, 255, 128);
+    background-color:white;
+    border: 5px solid white;
+}
+.video-item-icon:active {
+    color:rgba(0, 255, 128, 0.5);
+}
+.video-item-icon2 {
+    margin-left:40px;
+    color:white;
+    background-color:rgb(255, 8, 0);
+    border-radius: 100%;
+    border: 5px solid rgb(255, 8, 0);
+}
+.video-item-icon2:hover {
+    color:rgb(255, 8, 0);
+    background-color:white;
+    border: 5px solid white;
+}
+.video-item-icon2:active {
+    color:rgba(255, 8, 0, 0.5);
+}
+.video-item-actions {
+    display: flex;
+    justify-content: center;
+}
+.video-item-no-video {
+    margin: 2px;
+    height: 446px;
+    width: 496px;
+    background-color: lightgray;
+    border-radius:5px;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+}
+.video-item-no-video-answerCall {
+    height: 83px;
+    width: 248px;
+    display: flex;
+    align-items: center;
+}
+.video-item-text {
+    text-align: center;
+    margin-top:10px;
+    font-weight: bold;
+}
+
+
+

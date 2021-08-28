@@ -13,6 +13,7 @@ import ChatRoom from './pages/ChatRoom'
 import Home from './pages/Home'
 import Navbar from './Components/Navbar';
 import VideoChatContainer from './Components/videoCallContainer';
+import VideoCall from './pages/VideoCall'
 
 import Signup from './Components/SignUp';
 import Login from './Components/Login';
@@ -88,6 +89,10 @@ const App = () => {
         </Route>
         <Route path="/chat" exact>
           <ChatRoom/>
+          <VideoChatContainer/>
+        </Route>
+        <Route path="/call" exact>
+          <VideoCall/>
           <VideoChatContainer/>
         </Route>
         <Redirect to="/" />
