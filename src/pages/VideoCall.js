@@ -24,23 +24,26 @@ function VideoCall() {
     const [showVideoEmitter, setShowVideoEmitter] = useState(true)
     const [showVideoReceiver, setShowVideoReceiver] = useState(false)
     const [showCallIcon, setShowCallIcon] = useState('show')
-    const [callText, setCallText] = useState('')
-    const [receivedCallInfo, setReceivedCallInfo] = useState()
+    const [callText, setCallText] = useState({text:'', user:''})
+    const [receivedCallInfo, setReceivedCallInfo] = useState(null)
 
     useEffect(async()=>{
         videoEmitter.current.srcObject = await navigator.mediaDevices.getUserMedia({ video: true, audio: false })
         videoEmitter.current.play()
     },[])
-
+    
     useEffect(async()=>{
         const res=firebase.firestore().collection('calls').doc(currentUser.email)
         .onSnapshot(async(snapshot)=>{
          if(snapshot.data()){
             if(snapshot.data().type==="offer"){
                 setReceivedCallInfo(snapshot.data())
+                setShowVideoReceiver(false)
+                setCallText({text:'', user:''})
             }
             else if(snapshot.data().type==="accept"){
                 setShowVideoReceiver(true)
+                setCallText({text:'', user:''})
                 peer.current.signal(JSON.parse(snapshot.data().sd))
           
                 peer.current.on('stream',(data)=>{
@@ -48,8 +51,22 @@ function VideoCall() {
                     videoReceiver.current.play()
                   }) 
             }
-            else if(snapshot.data().type==="accept") {
-                setCallText(`The call was not accepted from ${snapshot.data().from}`)
+            else if(snapshot.data().type==="refuse") {
+                try {
+                    await firebase.firestore().collection('calls').doc(snapshot.data().from).delete()
+                    await firebase.firestore().collection('calls').doc(currentUser.email).delete()
+                    setCallText({text:'The call was not accepted fromby', user:snapshot.data().from.split('@')[0]})
+                    setShowCallIcon("show")
+                }
+                catch (e) {
+                    console.log(e)
+                }
+            }
+            else if(snapshot.data().type==="destroy") {
+                setCallText({text:'The call was destroyed by', user:snapshot.data().from.split('@')[0]})
+                setShowVideoReceiver(false)
+                setShowCallIcon("show")
+                await firebase.firestore().collection('calls').doc(currentUser.email).delete()
             }
          }
          else{
@@ -60,11 +77,13 @@ function VideoCall() {
     },[])
 
 
-    const handleMakeCall = async(event) => {
+    const handleMakeOrEndCall = async(event) => {
         
         if(showCallIcon==="show") {          
             if(calledUser.current.value==="")return
             setShowCallIcon("")
+            setShowVideoReceiver(false)
+            setCallText({text:'Try to establish a connection', user:calledUser.current.value.split('@')[0],})
             peer.current=new Peer({
                 initiator:true,
                 stream:videoEmitter.current.srcObject,
@@ -86,7 +105,7 @@ function VideoCall() {
                     from:currentUser.email,
                     sd:JSON.stringify(data)
                 })
-                setCallText(`Waiting for answer from ${calledUser.current.value.split('@')[0]} ...`)
+                setCallText({text:'Waiting for answer from', user:calledUser.current.value.split('@')[0],color:''})
                 setShowCallIcon("noshow")
                 calledUserFix.current=calledUser.current.value
                }
@@ -98,10 +117,27 @@ function VideoCall() {
         }
         if (showCallIcon==="noshow"){
             try{
-            await firebase.firestore().collection('calls').doc(calledUserFix.current).delete()
+            if(receivedCallInfo!=null){
+                await firebase.firestore().collection('calls').doc(receivedCallInfo.from).delete()
+                await firebase.firestore().collection('calls').doc(currentUser.email).delete()
+                await firebase.firestore().collection('calls').doc(receivedCallInfo.from)
+                .set({
+                        type:"destroy",
+                        from:currentUser.email,
+                })
+            }else{
+                await firebase.firestore().collection('calls').doc(calledUserFix.current).delete()
+                await firebase.firestore().collection('calls').doc(currentUser.email).delete()
+                await firebase.firestore().collection('calls').doc(calledUser.current.value)
+                .set({
+                        type:"destroy",
+                        from:currentUser.email,
+                })   
+            }
             peer.current.destroy()
-            setCallText('The call is destroyed')
+            setCallText({text:'The call is destroyed ...', user:''})
             setShowCallIcon("show")
+            setShowVideoReceiver(false)
             }
             catch(e) {
                 console.log(e)
@@ -132,17 +168,19 @@ function VideoCall() {
           from:currentUser.email,
           sd:JSON.stringify(data)
         })
-        setReceivedCallInfo(null)
-        setCallText("Joining call ...")
-        peer.current.on('stream',(data)=>{
-            videoReceiver.current.srcObject=data
-            videoReceiver.current.play()
-        }) 
+        setCallText({text:'', user:''})
+        setShowCallIcon("noshow")
         }
         catch(e){
            console.log(e) 
         }
         })
+        peer.current.on('stream',(data)=>{
+            setCallText({text:'', user:''})
+            setShowVideoReceiver(true)
+            videoReceiver.current.srcObject=data
+            videoReceiver.current.play()
+        }) 
     }
     const handleRefuseCall = () => {
         try{
@@ -152,7 +190,8 @@ function VideoCall() {
               from:currentUser.email,
             })
             setReceivedCallInfo(null)
-            setCallText("Call refused ...")
+            setCallText({text:'Call refused ...', user:''})
+            setShowCallIcon("show")
             }
             catch(e){
                console.log(e) 
@@ -165,7 +204,7 @@ function VideoCall() {
               <video ref={videoEmitter}></video>
               <div className="video-item-actions">
                 <select name="pets" id="pet-select" ref={calledUser}>
-                <option value="">--Please choose an option--</option>
+                <option value="">--Please choose who to call--</option>
                 {
                 usersChat&&usersChat.map((user, index)=>(
                     <option value={user.email}>{user.email.split('@')[0]}</option>                    
@@ -173,7 +212,7 @@ function VideoCall() {
                 }
                 </select>
                 {(showCallIcon==='show' || showCallIcon==='noshow') &&
-                <div className={showCallIcon==='show'?"video-item-icon":"video-item-icon2"} onClick={handleMakeCall}>
+                <div className={showCallIcon==='show'?"video-item-icon":"video-item-icon2"} onClick={handleMakeOrEndCall}>
                 {showCallIcon==='show'&&<MdCall size={32}/>}
                 {showCallIcon==='noshow'&&<MdCallEnd size={32}/>}        
                 </div>
@@ -184,11 +223,8 @@ function VideoCall() {
             {showVideoReceiver?
                 <video ref={videoReceiver}></video>
             :
-            receivedCallInfo!=null&&
+            receivedCallInfo!=null && !showVideoReceiver &&
                 <div className="video-item-no-video">
-                    <div>
-                        Join the call with <span style={{fontWeight: 'bold'}}>{receivedCallInfo.from.split('@')[0]}</span>
-                    </div>
                     <div className="video-item-no-video-answerCall">
                     <div style={{width:'50%'}}>
                     <div className="video-item-icon" style={{width:'40px'}}
@@ -206,7 +242,7 @@ function VideoCall() {
                 </div>
             }
                 <div className="video-item-text">
-                <span>{callText}</span>
+                <p>{callText.text} <span className="video-item-text-username">{callText.user}</span></p>
                 </div>
             </div>
         </div>

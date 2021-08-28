@@ -1,7 +1,6 @@
 import { ChatEngine } from 'react-chat-engine';
 import '../Css/ChatRoom.css';
 import { useAuth } from "../Contexts/AuthContext"
-import ChatRoomHeader from '../Components/ChatRoomHeader'
 
 function ChatRoom() {
 

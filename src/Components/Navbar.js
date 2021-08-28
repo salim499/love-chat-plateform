@@ -1,6 +1,6 @@
 import React , {useEffect} from 'react'
 import './../Css/Navbar.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import $ from 'jquery';
 import { useAuth } from '../Contexts/AuthContext'
 import {AiOutlineLogin, AiOutlineHome, AiOutlineLogout} from 'react-icons/ai'
@@ -12,6 +12,8 @@ const Navbar = () => {
 
   const {currentUser } = useAuth()
 
+  const location = useLocation() 
+  console.log(location)
 
   function animation(){
     var tabsNewAnim = $('#navbarSupportedContent');
@@ -78,7 +80,8 @@ const Navbar = () => {
           <div className="right"></div>
         </div>
         
-        <li className="nav-item active">
+        <li className="nav-item active"
+        style={{backgroundColor:location.pathname==='/'?'rgba(255,255,255,0.2)':null}}>
           <NavLink className="nav-link" to="/" exact>
           <AiOutlineHome/>Home
           </NavLink>
