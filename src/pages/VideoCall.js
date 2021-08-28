@@ -39,7 +39,7 @@ function VideoCall() {
             if(snapshot.data().type==="offer"){
                 setReceivedCallInfo(snapshot.data())
                 setShowVideoReceiver(false)
-                setCallText({text:'', user:''})
+                setCallText({text:'call from ', user:snapshot.data().from})
             }
             else if(snapshot.data().type==="accept"){
                 setShowVideoReceiver(true)
@@ -225,6 +225,8 @@ function VideoCall() {
             :
             receivedCallInfo!=null && !showVideoReceiver &&
                 <div className="video-item-no-video">
+                    <span>call from <span
+                    style={{fontWeight:'bold'}}>{receivedCallInfo.from .split('@')[0]}</span></span>
                     <div className="video-item-no-video-answerCall">
                     <div style={{width:'50%'}}>
                     <div className="video-item-icon" style={{width:'40px'}}
