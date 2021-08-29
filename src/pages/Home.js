@@ -1,4 +1,5 @@
 import React, {useRef, useState, useEffect} from 'react'
+
 import '../Css/home.css'
 
 import LoveResult from '../Components/loveResultPortal';
@@ -34,9 +35,18 @@ function Home() {
         .then(response => 
           response.json()
         )
-        .then((data) => {
+        .then(async(data) => {
             console.log(data)
-            setMatchResult(data)
+            try {
+              const res=await firebase.firestore().collection(currentUser.email).doc(data.sname)
+              .set(
+                  data
+              )
+              setMatchResult(data)
+            }
+            catch(e){
+
+            }
         })
         .catch((err) =>{
             console.log("err")

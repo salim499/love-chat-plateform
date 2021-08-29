@@ -2,19 +2,24 @@ import React, {useState, useEffect} from 'react'
 import ReactDom from 'react-dom'
 import { useHistory } from 'react-router-dom'
 import { useAuth } from "../Contexts/AuthContext"
+import Loader from './loader'
 const MODAL_STYLES = {
     position: 'fixed',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    backgroundColor: '#FFF',
+    backgroundColor: 'rgba(255,255,255,0.75)',
     padding: '50px',
     zIndex: 1000,
     height:'500px',
-    width:'450px',
+    width:'50%',
+    minWidth: '440px',
     display: 'flex',
     flexDirection:'column',
     justifyContent:'space-around',
+    alignItems: 'center',
+    borderRadius: '5px',
+    boxShadow: '4px 5px 1px white' 
   }
   
   const OVERLAY_STYLES = {
@@ -42,7 +47,7 @@ const MODAL_STYLES = {
 
   const ITEM_STYLES = {
     fontSize: '32px',
-    textShadow: '-1px -1px #0c0, 1px 1px #060, -3px 0 4px #000',
+    textShadow: '-0.5px -0.5px #0c0, 0.5px 0.5px #060, -0.5px 0 2px #000',
     fontFamily:'Arial, Helvetica, sans-serif',
     color: '#090',
     padding:'16px',
@@ -68,12 +73,19 @@ function ModalNewItem(props) {
   const {currentUser } = useAuth()
 
   const [SVG, setSVG] = useState(null)
+  const [showResult, setShowResult] = useState(false)
 
   useEffect(() =>{
     import(`../assets/svgs/${props.svgNumber}.svg`)
     .then(d=>{
       setSVG(d.default)
     }) 
+  },[])
+  useEffect(()=>{
+    const timer = setTimeout(() => {
+      setShowResult(true)
+    }, 5000);
+    return () => clearTimeout(timer);  
   },[])
 
   const handleLinkChat = () => {
@@ -91,18 +103,29 @@ function ModalNewItem(props) {
 
     return (
  ReactDom.createPortal(
-    <>
+    <> 
         <div style={OVERLAY_STYLES} />
         <div style={MODAL_STYLES}>
+        <Loader type="Bars" timeout={4500}/>
+        {
+          !showResult&&  <span style={{boxShadow:'bold'}}>Calculating ...</span>
+        }
+        {
+          showResult&&
+          <>
+        <Loader type="Hearts"/>
         {SVG!=null &&
         <img src={SVG}/>}
         <div style={ITEM_STYLES}>
           {props.messageResult}
         </div>
         <div style={BUTTONS_STYLES}>
+    
           <button onClick={handleLinkChat} style={BUTTONS_ITEM_STYLES}>Chatroom</button>
           <button onClick={handleExit} style={BUTTONS_ITEM_STYLES}>Exit</button>
         </div>
+          </>
+        }
         </div>
     </>,
            document.getElementById('portal')
