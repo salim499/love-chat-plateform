@@ -55,7 +55,7 @@ function VideoCall() {
                 try {
                     await firebase.firestore().collection('calls').doc(snapshot.data().from).delete()
                     await firebase.firestore().collection('calls').doc(currentUser.email).delete()
-                    setCallText({text:'The call was not accepted fromby', user:snapshot.data().from.split('@')[0]})
+                    setCallText({text:'The call was not accepted by', user:snapshot.data().from.split('@')[0]})
                     setShowCallIcon("show")
                 }
                 catch (e) {
@@ -88,14 +88,7 @@ function VideoCall() {
                 initiator:true,
                 stream:videoEmitter.current.srcObject,
                 trickle:false, 
-                config:{
-                  iceServers: [
-                    {
-                      urls: ['stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302'],
-                    },
-                  ],
-                  iceCandidatePoolSize: 10,
-                }
+                config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:global.stun.twilio.com:3478?transport=udp' }] },
               })
             peer.current.on('signal',async(data)=>{
                 try {
@@ -150,14 +143,7 @@ function VideoCall() {
             initiator:false,
             stream:videoEmitter.current.srcObject,
             trickle:false, 
-            config:{
-              iceServers: [
-                {
-                  urls: ['stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302'],
-                },
-              ],
-              iceCandidatePoolSize: 10,
-            }
+            config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:global.stun.twilio.com:3478?transport=udp' }] },
         })
         peer.current.signal(JSON.parse(receivedCallInfo.sd))
         peer.current.on('signal',(data)=>{
