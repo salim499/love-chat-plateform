@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/love-chat-plateform/static/css/main.a01c4525.chunk.css",
+    "main.css": "/love-chat-plateform/static/css/main.83ea28d6.chunk.css",
     "main.js": "/love-chat-plateform/static/js/main.285f01eb.chunk.js",
     "main.js.map": "/love-chat-plateform/static/js/main.285f01eb.chunk.js.map",
     "runtime-main.js": "/love-chat-plateform/static/js/runtime-main.625ecafd.js",
@@ -212,7 +212,7 @@
     "static/js/103.56243eaa.chunk.js.map": "/love-chat-plateform/static/js/103.56243eaa.chunk.js.map",
     "index.html": "/love-chat-plateform/index.html",
     "static/css/2.18d2bca9.chunk.css.map": "/love-chat-plateform/static/css/2.18d2bca9.chunk.css.map",
-    "static/css/main.a01c4525.chunk.css.map": "/love-chat-plateform/static/css/main.a01c4525.chunk.css.map",
+    "static/css/main.83ea28d6.chunk.css.map": "/love-chat-plateform/static/css/main.83ea28d6.chunk.css.map",
     "static/js/2.5477f29b.chunk.js.LICENSE.txt": "/love-chat-plateform/static/js/2.5477f29b.chunk.js.LICENSE.txt",
     "static/media/0.svg": "/love-chat-plateform/static/media/0.101d5765.svg",
     "static/media/1.svg": "/love-chat-plateform/static/media/1.5d73640a.svg",
@@ -320,7 +320,7 @@
     "static/js/runtime-main.625ecafd.js",
     "static/css/2.18d2bca9.chunk.css",
     "static/js/2.5477f29b.chunk.js",
-    "static/css/main.a01c4525.chunk.css",
+    "static/css/main.83ea28d6.chunk.css",
     "static/js/main.285f01eb.chunk.js"
   ]
 }
