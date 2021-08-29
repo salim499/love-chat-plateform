@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/love-chat-plateform/static/css/main.83ea28d6.chunk.css",
-    "main.js": "/love-chat-plateform/static/js/main.285f01eb.chunk.js",
-    "main.js.map": "/love-chat-plateform/static/js/main.285f01eb.chunk.js.map",
+    "main.js": "/love-chat-plateform/static/js/main.45c3f9db.chunk.js",
+    "main.js.map": "/love-chat-plateform/static/js/main.45c3f9db.chunk.js.map",
     "runtime-main.js": "/love-chat-plateform/static/js/runtime-main.625ecafd.js",
     "runtime-main.js.map": "/love-chat-plateform/static/js/runtime-main.625ecafd.js.map",
     "static/css/2.18d2bca9.chunk.css": "/love-chat-plateform/static/css/2.18d2bca9.chunk.css",
@@ -321,6 +321,6 @@
     "static/css/2.18d2bca9.chunk.css",
     "static/js/2.5477f29b.chunk.js",
     "static/css/main.83ea28d6.chunk.css",
-    "static/js/main.285f01eb.chunk.js"
+    "static/js/main.45c3f9db.chunk.js"
   ]
 }
