@@ -8,6 +8,10 @@ import { useAuth } from "../Contexts/AuthContext"
 
 import firebase from '../Components/firebase'
 
+import Login from '../Components/Login';
+
+import { Container } from "react-bootstrap";
+
 function Home() {
 
     const {showVideoCall, currentCallState, callInformation, setCallInformation, setShowVideoCall } = usePeer() 
@@ -66,6 +70,7 @@ function Home() {
       },[])
 
     return (
+        currentUser && currentUser!=null?
         matchResult===null?
         <form className="home" onSubmit={handleMatch}>
         <div className="form">
@@ -83,7 +88,7 @@ function Home() {
             </label>  
         </div>
         <div>
-            <input type="submit" value="Calcul love" className="button"/> 
+            <input type="submit" value="Run" className="button"/> 
         </div>
         </form>
         :<LoveResult 
@@ -91,6 +96,15 @@ function Home() {
         messageResult={matchResult.result}
         setMatchResult={setMatchResult}
         />
+        :
+        <Container
+        className="d-flex align-items-center justify-content-center"
+        style={{ minHeight: "100vh" }}
+        >
+        <div className="w-100" style={{ maxWidth: "400px" }}>
+        <Login/>
+        </div>
+       </Container>
     )
 }
 

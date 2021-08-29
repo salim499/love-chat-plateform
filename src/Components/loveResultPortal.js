@@ -51,7 +51,14 @@ const MODAL_STYLES = {
     display:'block',
     margin:'rgba16px',
   }
-
+  const BUTTONS_STYLES = {
+    display:'flex',
+    justifyContent:'space-around'
+  }
+  const BUTTONS_ITEM_STYLES = {
+    width:'95px',
+    marginTop:'10px'
+  }
  
 
 function ModalNewItem(props) {
@@ -70,6 +77,7 @@ function ModalNewItem(props) {
   },[])
 
   const handleLinkChat = () => {
+    props.setMatchResult(null)
     if(currentUser!=null) {
       history.push("/chat")
       return
@@ -91,9 +99,9 @@ function ModalNewItem(props) {
         <div style={ITEM_STYLES}>
           {props.messageResult}
         </div>
-        <div>
-          <button onClick={handleLinkChat}>Chatroom</button>
-          <button onClick={handleExit}>Exit</button>
+        <div style={BUTTONS_STYLES}>
+          <button onClick={handleLinkChat} style={BUTTONS_ITEM_STYLES}>Chatroom</button>
+          <button onClick={handleExit} style={BUTTONS_ITEM_STYLES}>Exit</button>
         </div>
         </div>
     </>,

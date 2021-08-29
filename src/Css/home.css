@@ -12,7 +12,6 @@
 .form {
     position: relative;
     height: 40px;
-    width: 100%;
     overflow:hidden;
     background-color:rgba(255,255,255,0.1);
     border-radius: 10px;
@@ -26,9 +25,9 @@
     text-align: center;
     background:rgba(255, 255, 255, 0.8);
     font-family:"Segoe print", Arial, Helvetica, sans-serif;
-    color:rgb(247, 95, 7);
+    color:crimson;
     padding:24px 0px 32px 0px;
-    font-weight:lighter;
+    font-weight: bold;
     text-align:center;
     display:inline;
     
@@ -68,17 +67,24 @@
 }
 
 .button {
-    width: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background:crimson;
+    background: crimson;
     color:#fff;
     font-family:"Segoe print", Arial, Helvetica, sans-serif;
-    border:1pxsolid#eee;
-    border-radius:20px;
-    box-shadow:5px5px5px#eee;
+    border:1px solid crimson;
+    border-radius:100%;
     text-shadow:none;
+}
+.button:hover {
+    border:1px solid crimson;
+    border-radius:100%;
+    box-shadow:1px 1px 1px 1px rgb(255, 255, 255);   
+}
+.button:active {
+    background: rgb(255, 255, 255);
+    color:crimson;   
 }
 
 

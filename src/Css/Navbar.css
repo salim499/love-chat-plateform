@@ -11,7 +11,7 @@ i {
 }
 
 .navbar-mainbg {
-  background-color:rgb(0,123,255);
+  background-color:crimson;
   padding: 0px;
 }
 #navbarSupportedContent {
@@ -33,7 +33,7 @@ i {
   float: left;
 }
 #navbarSupportedContent ul li a {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
   font-size: 17.5px;
   display: block;

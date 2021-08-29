@@ -81,25 +81,25 @@ const Navbar = () => {
         </div>
         
         <li className="nav-item active"
-        style={{backgroundColor:location.pathname==='/'?'rgba(255,255,255,0.2)':null}}>
+        style={{backgroundColor:location.pathname==='/'?'rgba(255,255,255,0.15)':null}}>
           <NavLink className="nav-link" to="/" exact>
           <AiOutlineHome/>Home
           </NavLink>
         </li>
         <li className="nav-item"
-        style={{backgroundColor:location.pathname==='/my-account'?'rgba(255,255,255,0.2)':null}}>
+        style={{backgroundColor:location.pathname==='/my-account'?'rgba(255,255,255,0.15)':null}}>
           <NavLink className="nav-link" to="/my-account" exact>
             <VscAccount/>My Account
           </NavLink>
         </li>
         <li className="nav-item"
-        style={{backgroundColor:location.pathname==='/chat'?'rgba(255,255,255,0.2)':null}}>
+        style={{backgroundColor:location.pathname==='/chat'?'rgba(255,255,255,0.15)':null}}>
           <NavLink className="nav-link" to="/chat" exact>
           <BsChatDots/>Chatroom 
           </NavLink>
         </li>
         <li className="nav-item"
-        style={{backgroundColor:location.pathname==='/call'?'rgba(255,255,255,0.2)':null}}>
+        style={{backgroundColor:location.pathname==='/call'?'rgba(255,255,255,0.15)':null}}>
           <NavLink className="nav-link" to="/call" exact>
           <MdCall/>PeerToPeerCall
           </NavLink>
@@ -113,18 +113,21 @@ const Navbar = () => {
           <div className="right"></div>
         </div>
         
-        <li className="nav-item active">
+        <li className="nav-item active"
+        style={{backgroundColor:location.pathname==='/'?'rgba(255,255,255,0.15)':null}}>
           <NavLink className="nav-link" to="/" exact>
           <AiOutlineHome/>Home
           </NavLink>
         </li>
 
-        <li className="nav-item">
+        <li className="nav-item"
+        style={{backgroundColor:location.pathname==='/signup'?'rgba(255,255,255,0.15)':null}}>
           <NavLink className="nav-link" to="/signup" exact>
            <VscSignIn/>Signup
           </NavLink>
         </li>
-        <li className="nav-item">
+        <li className="nav-item"
+        style={{backgroundColor:location.pathname==='/login'?'rgba(255,255,255,0.15)':null}}>
           <NavLink className="nav-link" to="/login" exact>
           <AiOutlineLogin/>
           Login

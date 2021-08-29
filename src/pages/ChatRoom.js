@@ -10,7 +10,7 @@ function ChatRoom() {
   return (
     currentUser != null?
     <ChatEngine
-      height="90vh"
+      height="95vh"
       projectID={process.env.REACT_APP_CHAT_ENGINE_PROJECT_ID}
       userName={currentUser.email.split("@")[0]}
       userSecret={currentUser.uid}
