@@ -1,0 +1,2 @@
+(this.webpackJsonpmodern_react_navbar=this.webpackJsonpmodern_react_navbar||[]).push([[89],{512:function(a,t,e){"use strict";e.r(t),t.default=e.p+"static/media/86.78576043.svg"}}]);
+//# sourceMappingURL=89.ba75185c.chunk.js.map
